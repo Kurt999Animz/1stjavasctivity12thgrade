@@ -1,0 +1,281 @@
+:root {
+    --bpm: 134*2;
+    --beat-duration: calc(60s / var(--bpm));
+}
+
+::-webkit-scrollbar {
+  display: none;
+}
+
+@font-face {
+    font-family: 'cuteshit';
+    src: url('cute.ttf') format('truetype');
+}
+
+html{
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    width: 100%;
+    height: 100%;
+}
+body {
+    font-family: 'cuteshit';
+    margin: 0;
+    background: black;
+    color: white;
+    text-align: center;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    animation: pulse var(--beat-duration) infinite;
+    animation-play-state: paused;
+}
+
+#startScreen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('bg.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 4;
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1.01);
+    }
+    49% {
+        transform: scale(1);
+    }
+    50% {
+        transform: scale(1.005);
+    }
+    100% {
+        transform: scale(1);
+    }
+}
+
+#startScreen.fade-out {
+    animation: fadeOut 1s forwards;
+    animation-delay: 1s;
+}
+
+@keyframes fadeOut {
+    from {
+        opacity: 1;
+    }
+    to {
+        opacity: 0;
+        visibility: hidden;
+    }
+}
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes fadeUp {
+      from {
+         translate: 0 30vh;
+    }
+    to {
+        translate: 0 0vh;
+    }
+}
+#startScreen button {
+    padding: 15px 25px;
+    font-size: 20px;
+    z-index: 100;
+    margin-top: 20px;
+    cursor: pointer;
+    color: white;
+    background-color: rgba(255, 255, 255, 0);
+    border: 2px solid white;
+    border-radius: 500px;
+    text-align: center;
+    backdrop-filter: blur(3px);
+    transition: background-color 0.3s ease, color 0.3s ease, scale 0.3s ease;
+}
+
+#startScreen button:hover {
+    scale: 1.1;
+}
+#backgroundimg {
+    display: none;
+    flex-direction: column;
+    padding: 20px;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background-image: url('megumin.jpg');
+    background-size: cover;
+    background-position: center;
+    overflow: hidden;
+    transition: filter 0.7s ease, transform 0.7s ease;
+}
+
+#sidebar {
+    position: fixed;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    top: 0;
+    left: 0;
+    width: 17vw;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.493);
+    transition: width 0.3s ease;
+    z-index: 3;
+}
+
+#sidebar:hover {
+    width: 20vw;
+}
+
+.sidebuttons {
+    background-color: rgba(0, 0, 0, 0.353);
+    color: white;
+    border-radius: 1000px;
+    min-width: 16vh;
+    border: none;
+    max-width: 16vh;
+    padding: 2vh;
+    font-size: 16px;
+    text-align: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, color 0.3s ease, scale 0.3s ease;
+    width: auto;
+    max-width: 200px;
+    margin: 5px auto;
+}
+
+.sidebuttons:hover {
+    background-color: rgba(0, 0, 0, 0.445);
+    scale: 1.05;
+}
+
+#sidebar:hover ~ #backgroundimg {
+    filter: blur(5px);
+    transform: scale(1.1) translate(10vh, -3vh);
+}
+
+#flashbang {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0;
+    z-index: 2;
+    pointer-events: none;
+    transition: opacity 0.5s ease-in-out;
+}
+
+#gradient {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('gradient.png');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    translate: 0 30vh;
+    z-index: 1;
+    pointer-events: none;
+}
+
+#gradient.fade-up {
+    animation: fadeUp 1s ease forwards;
+}
+
+#black {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+    opacity: 0;
+    z-index: 101;
+    pointer-events: none;
+}
+#black.fade-in {
+    animation: fadeIn 1s ease forwards;
+    animation-delay: 0.05s;
+}
+
+#info {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.493);
+    border: none;
+    border-radius: 5px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    z-index: 3;
+}
+
+#info img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    pointer-events: none;
+}
+
+#desc {
+    position: fixed;
+    bottom: 10px;
+    right: 10px;
+    width: 50vw;
+    height: 40vh;
+    border-radius: 30px;
+    background-color: rgba(0, 0, 0, 0.493);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    overflow-y: scroll;
+    padding: 10px;
+    pointer-events: none;
+}
+#info:hover ~ #desc {
+    opacity: 1;
+    pointer-events: all;
+}
+#desc:hover {
+    opacity: 1;
+    pointer-events: all;
+}
+#descText {
+    color: white;
+    font-size: 33px;
+    padding: 10px;
+    text-align: justify;
+    scale: 0.9;
+}
+
+span {
+    color: yellow;
+    font-weight: bold;
+}
+
+button{
+    font-family: 'cuteshit';
+}
